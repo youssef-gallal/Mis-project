@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="row mt-5 w-100">
+    <h2 class="mb-5">Now Playing</h2>
+
+    <div
+      class="col-sm-6 col-md-4 col-lg-2 mb-4 d-flex justify-content-center"
+      *ngFor="let movie of movies; trackBy: trackByFn"
+    >
+      <div class="card h-100" style="border: none">
+        <a
+          class="text-decoration-none"
+          style="color: inherit"
+          [routerLink]="['/movie', movie.id]"
+        >
+          <div class="image-container position-relative">
+            <img
+              [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+              class="card-img-top pointer"
+              [alt]="movie.title"
+            />
+
+            <div class="circle-wrapper">
+              <svg
+                class="CircularProgressbar"
+                viewBox="0 0 100 100"
+                data-test-id="CircularProgressbar"
+              >
+                <path
+                  class="CircularProgressbar-trail"
+                  d="
+                  M 50,50
+                  m 0,-46
+                  a 46,46 0 1 1 0,92
+                  a 46,46 0 1 1 0,-92
+                "
+                  stroke-width="8"
+                  fill-opacity="0"
+                  style="stroke-dasharray: 430px, 430px; stroke-dashoffset: 0px"
+                ></path>
+                <path
+                  [ngStyle]="{ stroke: getBackgroundColor(movie.vote_average) }"
+                  class="CircularProgressbar-path"
+                  d="
+                  M 50,50
+                  m 0,-46
+                  a 46,46 0 1 1 0,92
+                  a 46,46 0 1 1 0,-92
+                "
+                  stroke-width="8"
+                  fill-opacity="0"
+                  [ngStyle]="{
+                    'stroke-dasharray':
+                      (movie.vote_average / 10) * 415 + 'px, 415px',
+                    'stroke-dashoffset': '98.269px',
+                    stroke: movie.vote_average > 7 ? '#66BB6A' : 'yellow'
+                  }"
+                ></path>
+                <text
+                  class="CircularProgressbar-text"
+                  x="25"
+                  y="58"
+                  style="font-size: 30px"
+                >
+                  {{ movie.vote_average | number : "1.2-2" }}
+                </text>
+              </svg>
+            </div>
+          </div>
+        </a>
+        <div class="card-body d-flex justify-content-between mt-3">
+          <div>
+            <h6 class="card-title fw-bold fa-5">{{ movie.title }}</h6>
+            <p class="card-title text-black-50">
+              {{ movie.release_date | date }}
+            </p>
+          </div>
+          <div>
+            <i
+              class="fa-heart fa-xl mt-4 pointer"
+              [class.fa-regular]="!isInWishlist(movie.id)"
+              [class.fa-solid]="isInWishlist(movie.id)"
+              [style.color]="isInWishlist(movie.id) ? '#ffd700' : 'black'"
+              (click)="toggleWishlist(movie, $event)"
+            ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center mt-4">
+  <button
+    class="btn btn-outline-dark custom-hover mx-1"
+    [disabled]="startIndex === 0"
+    (click)="previousPageSet()"
+  >
+    Previous
+  </button>
+
+  <span *ngFor="let page of visiblePages">
+    <button
+      class="btn btn-outline-dark custom-hover mx-1"
+      [class.clicked]="currentPage === page"
+      (click)="goToPage(page)"
+    >
+      {{ page }}
+    </button>
+  </span>
+
+  <button
+    class="btn btn-outline-dark custom-hover mx-1"
+    [disabled]="startIndex + maxVisiblePages >= totalPages"
+    (click)="nextPageSet()"
+  >
+    Next
+  </button>
+</div>

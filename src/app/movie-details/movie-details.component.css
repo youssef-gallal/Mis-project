@@ -1,0 +1,27 @@
+.btn-outline-primary {
+  color: #212529 !important;
+  border-color: #212529 !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: #ffe354 !important;
+  border-color: #ffe354 !important;
+  color: #212529 !important;
+}
+.star-rating {
+  font-size: 20px;
+  color: black;
+}
+
+.image-container {
+  display: inline-block;
+}
+
+.card-img-top {
+  transition: transform 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+.scroll-container {
+  gap: 10px;
+}

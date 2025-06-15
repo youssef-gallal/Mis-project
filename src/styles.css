@@ -1,0 +1,104 @@
+:root {
+  --primary-color: #ffe354;
+  --font-size: 16px;
+}
+
+.navbar {
+  /* background-color: var(--primary-color) !important; */
+  padding: 10px 0 !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.image-container {
+  overflow: visible !important;
+}
+
+.CircularProgressbar {
+  width: 40px !important;
+  background: #2b2929;
+  position: absolute;
+  bottom: -15px;
+  z-index: 12;
+  border-radius: 50%;
+  left: 10px;
+}
+
+.CircularProgressbar-trail {
+  stroke: #f9f9f9 !important;
+}
+.CircularProgressbar-text {
+  fill: #fff !important;
+  font-weight: 700;
+  font-size: 25px !important;
+  text-align: center;
+}
+.CircularProgressbar-background {
+  fill: #081c22 !important;
+}
+
+#bars {
+  margin-top: 7px;
+  color: #000;
+  cursor: pointer;
+  display: none;
+}
+
+.close {
+  display: none;
+}
+@media (max-width: 768px) {
+  .close {
+    display: block;
+  }
+  #bars {
+    display: block;
+    color: #000 !important;
+  }
+
+  .nav-header {
+    position: fixed;
+    height: 100vh;
+    width: 50%;
+    background-color: #fff;
+    z-index: 1111;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 1px 1px 10px #000;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    transition: 1s ease-in-out;
+  }
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: #000;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    cursor: pointer;
+  }
+
+  .overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+  }
+}
+
+@media (max-width: 576px) {
+  .close {
+    font-size: 22px;
+  }
+}

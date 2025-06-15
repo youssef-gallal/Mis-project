@@ -1,0 +1,165 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-4">
+      <img
+        [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+        alt="Black Widow"
+        class="img-fluid rounded"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="d-flex justify-content-between align-items-center">
+        <h1>{{ movie.original_title }}</h1>
+        <i
+          class="fa-heart fa-xl mt-5 pointer"
+          [class.fa-regular]="!isInWishlist(movie.id)"
+          [class.fa-solid]="isInWishlist(movie.id)"
+          [style.color]="isInWishlist(movie.id) ? '#ffd700' : 'black'"
+          (click)="toggleWishlist(movie, $event)"
+        ></i>
+      </div>
+      <p class="text-muted">{{ movie.release_date }}</p>
+      <div class="d-flex align-items-center mb-3">
+        <div class="me-4 d-flex gap-1">
+          @for(star of [1,2,3,4,5]; track $index){ @if((movie.vote_average / 2)
+          >= star){
+          <i class="fa-solid fa-star fa-lg" style="color: #f4d84f"></i>
+          } @if((movie.vote_average / 2) < star && (movie.vote_average / 2) >=
+          (star - 0.5)){
+          <i
+            class="fa-solid fa-star-half-stroke fa-lg"
+            style="color: #f4d84f"
+          ></i>
+          } @if((movie.vote_average / 2) < (star - 0.5)){
+          <i class="fa-regular fa-star fa-lg" style="color: #f4d84f"></i>
+          } }
+        </div>
+
+        <span>{{ movie.vote_count }}</span>
+      </div>
+      <p>{{ movie.overview }}</p>
+      <div class="mb-3">
+        @for( genre of movie.genres; track genre.id){
+        <span
+          class="btn m-2 text-dark rounded-pill me-1 text-center"
+          style="background-color: #ffe354"
+          >{{ genre.name }}</span
+        >
+        }
+      </div>
+      <p class="d-flex flex-wrap gap-3">
+        <strong>Duration:</strong> {{ movie.runtime }} Min.
+        <strong>Languages:</strong> {{ movie.spoken_languages[0].english_name }}
+      </p>
+      @for(company of movie.production_companies; track company.id){
+      @if(company.logo_path !== null){
+      <img
+        [src]="'https://image.tmdb.org/t/p/w500' + company.logo_path"
+        class="card-img-top m-4"
+        alt="The Good Doctor"
+        style="width: 80px"
+      />
+      } }
+      <div class="mt-3">
+        <a [href]="movie.homepage" class="btn btn-outline-primary rounded-pill"
+          >Website
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-link-45deg"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"
+            />
+            <path
+              d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"
+            /></svg
+        ></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="container">
+  <h2>Recommendations</h2>
+  <div class="scroll-container d-flex overflow-auto mt-4">
+    @for(result of recommendations.results; track result.id){
+    <div class="col-md-2 col-sm-4 col-6">
+      <div class="card h-100" style="border: none">
+        <a
+          class="text-decoration-none"
+          style="color: inherit"
+          [routerLink]="['/movie', result.id]"
+        >
+          <div class="image-container position-relative">
+            <img
+              [src]="'https://image.tmdb.org/t/p/w500' + result.poster_path"
+              class="card-img-top rounded"
+              alt="{{ result.title }}"
+            />
+            <div class="circle-wrapper">
+              <svg
+                class="CircularProgressbar"
+                viewBox="0 0 100 100"
+                data-test-id="CircularProgressbar"
+              >
+                <path
+                  class="CircularProgressbar-trail"
+                  d="
+                M 50,50
+                m 0,-46
+                a 46,46 0 1 1 0,92
+                a 46,46 0 1 1 0,-92
+              "
+                  stroke-width="8"
+                  fill-opacity="0"
+                  style="stroke-dasharray: 430px, 430px; stroke-dashoffset: 0px"
+                ></path>
+                <path
+                  [ngStyle]="{
+                    stroke: getBackgroundColor(result.vote_average)
+                  }"
+                  class="CircularProgressbar-path"
+                  d="
+                M 50,50
+                m 0,-46
+                a 46,46 0 1 1 0,92
+                a 46,46 0 1 1 0,-92
+              "
+                  stroke-width="8"
+                  fill-opacity="0"
+                  [ngStyle]="{
+                    'stroke-dasharray':
+                      (result.vote_average / 10) * 415 + 'px, 415px',
+                    'stroke-dashoffset': '98.269px',
+                    stroke: result.vote_average > 7 ? '#66BB6A' : 'yellow'
+                  }"
+                ></path>
+                <text
+                  class="CircularProgressbar-text"
+                  x="25"
+                  y="58"
+                  style="font-size: 30px"
+                >
+                  {{ result.vote_average | number : "1.2-2" }}
+                </text>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <div class="card-body p-2 mt-3">
+          <h6 class="card-title text-truncate fw-bold">{{ result.title }}</h6>
+          <p class="card-text small text-muted">{{ result.release_date }}</p>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+<!-- </div> -->

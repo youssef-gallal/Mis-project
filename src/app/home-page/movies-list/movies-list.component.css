@@ -1,0 +1,20 @@
+.clicked,
+.custom-hover:hover {
+  background-color: #ffe354 !important;
+  border-color: #ffe354 !important;
+  color: black !important;
+}
+.image-container {
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.card-img-top {
+  transition: transform 0.3s ease-in-out;
+  transform-origin: center;
+  border-radius: 10px;
+}
+
+.card-img-top:hover {
+  transform: scale(1.1);
+}

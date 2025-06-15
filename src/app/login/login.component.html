@@ -1,0 +1,36 @@
+<div class="split-form d-flex">
+    <div class="image-side">
+        <h2>Welcome Back!</h2>
+        <p>Enter your details to access your account</p>
+    </div>
+    <div class="form-side">
+        <h2>Sign In</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="handleSubmitForm()">
+            <input type="email" placeholder="Email" formControlName="email" required>
+            @if(formControls['email'].invalid && formControls['email'].touched){
+                <div id="nameHelp" class="form-text text-danger">
+                  @if(formControls['email'].hasError('required')){
+                  <span>Required</span>
+                  }@else if(formControls['email'].hasError('email')){
+                  <span>Not email format</span>
+                  }
+                </div>
+                }
+            <input type="password" placeholder="Password" formControlName="password" required>
+            @if(formControls['password'].invalid && formControls['password'].touched){
+                <div id="nameHelp" class="form-text text-danger">
+                  @if(formControls['password'].hasError('required')){
+                  <span>Required</span>
+                  }
+                </div>
+                }
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe">
+                <label for="rememberMe">Remember Me</label>
+            </div>
+            <button type="submit" [disabled]="loginForm.invalid">Login</button>
+            <p class="my-4">Don't have an account? <a href="/registration" routerLink="/registration">Sign Up</a></p>
+        </form>
+    </div>
+</div>
+
