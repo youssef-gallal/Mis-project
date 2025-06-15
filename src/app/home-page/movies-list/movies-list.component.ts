@@ -1,9 +1,10 @@
 import { AddToWishlistService } from './../../service/add-to-wishlist.service';
 import { Component } from '@angular/core';
 import { CrudRequestService } from '../../service/crud-request.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Movie } from '../../types/types';
+import { UsernameService } from '../../service/username.service';
 
 @Component({
   selector: 'app-movies-list',
@@ -21,11 +22,13 @@ export class MoviesListComponent {
   maxVisiblePages = 6;
   startIndex = 0;
   visiblePages: number[] = [];
-  vote : number = 0
+  vote: number = 0
+  username: string | null = '';
 
-  constructor(private _crudService: CrudRequestService,private wishlistService: AddToWishlistService) {}
+  constructor(private router: Router, private _crudService: CrudRequestService, private wishlistService: AddToWishlistService, private UserName: UsernameService) { }
 
   ngOnInit() {
+    this.username = this.UserName.getUsername()
     this.loadMovies(this.currentPage);
   }
 
@@ -55,6 +58,7 @@ export class MoviesListComponent {
       this.loadMovies(page);
       this.currentPage = page;
     }
+
   }
 
   nextPageSet() {
@@ -62,6 +66,7 @@ export class MoviesListComponent {
       this.startIndex += this.maxVisiblePages;
       this.updateVisiblePages();
     }
+
   }
 
   previousPageSet() {
@@ -89,8 +94,20 @@ export class MoviesListComponent {
     return this.wishlistService.isInWishlist(movieId);
   }
 
-  getBackgroundColor(vote:number): string {
+  getBackgroundColor(vote: number): string {
     return this.vote > 7 ? 'green' : 'yellow';
+  }
+  handleMovieClick(movieId: number, event: Event) {
+    event.preventDefault(); // prevent default anchor behavior
+
+    const username = this.UserName.getUsername(); // or localStorage.getItem('username');
+
+    if (username) {
+      this.router.navigate(['/movie', movieId]);
+    } else {
+      // alert('Please log in or create a username to view movie details.');
+      this.router.navigate(['/login']);
+    }
   }
 
 

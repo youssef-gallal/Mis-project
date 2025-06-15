@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -11,34 +12,19 @@ export class RegistrationComponent {
   registerForm: FormGroup;
 
 
- passwordMatchValidator(): ValidatorFn {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.parent) return null;
-      const password = control.parent.get('password')?.value;
-      const confirmPassword = control.value;
-  
-      return password && confirmPassword && password === confirmPassword
-        ? null
-        : { passwordMismatch: true };
-    };
-  }
 
-  constructor(private fb: FormBuilder) {
-    this.registerForm= this.fb.group({
-      Name:['', [Validators.required,Validators.minLength(3)]],
-      email: ['', [ Validators.required,Validators.email]],
-      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]{11}$')]],
-      password: ['', [ Validators.required, Validators.minLength(8),Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$')]],
-      confirmPassword: ['', [Validators.required, this.passwordMatchValidator()]],
+
+  constructor(private fb: FormBuilder, private router: Router) {
+    this.registerForm = this.fb.group({
+      Name: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
     });
   }
 
-  get formControls() {
-    return this.registerForm.controls;
-  }
-  
-  handleSubmitForm() {
+  submit() {
+    this.router.navigate(['/login']);
     console.log(this.registerForm.value);
   }
-
 }

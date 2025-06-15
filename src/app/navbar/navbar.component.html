@@ -4,99 +4,51 @@
       <span class="navbar-brand pointer fw-bold" routerLink="movies">
         <img id="img_color" class="img_color" src="./logo-1x.png" alt="" />
       </span>
-      <div
-        class="collapse navbar-collapse justify-content-end"
-        id="navbarNavAltMarkup"
-      >
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div id="nav-header" style="right: -50%" class="navbar-nav nav-header">
           <div (click)="handleClose()" class="close">x</div>
-          <a
-            class="nav-link pointer"
-            routerLink="movies"
-            routerLinkActive="active_link"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >Home</a
-          >
-          <a
-            class="nav-link pointer"
-            routerLink="/login"
-            routerLinkActive="active_link"
-            >Login</a
-          >
-          <a
-            class="nav-link pointer"
-            routerLink="/registration"
-            routerLinkActive="active_link"
-            >Register</a
-          >
+          <a class="nav-link pointer" routerLink="movies" routerLinkActive="active_link"
+            [routerLinkActiveOptions]="{ exact: true }">Home</a>
+          <a class="nav-link pointer" routerLink="/login" routerLinkActive="active_link">Login</a>
+          <a class="nav-link pointer" routerLink="/registration" routerLinkActive="active_link">Register</a>
           <div class="btn-group" role="group" aria-label="Language selection">
             <div class="btn-group" role="group">
-              <button
-                id="btnGroupDrop1"
-                type="button"
-                class="btn dropdown-toggle text-dark"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+              <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle text-dark" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 {{ selectedLanguage }}
               </button>
-              <ul
-                class="dropdown-menu text-white"
-                aria-labelledby="btnGroupDrop1"
-              >
+              <ul class="dropdown-menu text-white" aria-labelledby="btnGroupDrop1">
                 <li>
-                  <a
-                    class="dropdown-item text-dark"
-                    href="#"
-                    (click)="changeLanguage('en')"
-                    >English</a
-                  >
+                  <a class="dropdown-item text-dark" href="#" (click)="changeLanguage('en')">English</a>
                 </li>
                 <li>
-                  <a
-                    class="dropdown-item text-dark"
-                    href="#"
-                    (click)="changeLanguage('ar')"
-                    >العربية</a
-                  >
+                  <a class="dropdown-item text-dark" href="#" (click)="changeLanguage('ar')">العربية</a>
                 </li>
                 <li>
-                  <a
-                    class="dropdown-item text-dark"
-                    href="#"
-                    (click)="changeLanguage('fr')"
-                    >Français</a
-                  >
+                  <a class="dropdown-item text-dark" href="#" (click)="changeLanguage('fr')">Français</a>
                 </li>
                 <li>
-                  <a
-                    class="dropdown-item text-dark"
-                    href="#"
-                    (click)="changeLanguage('zh')"
-                    >中文</a
-                  >
+                  <a class="dropdown-item text-dark" href="#" (click)="changeLanguage('zh')">中文</a>
                 </li>
               </ul>
             </div>
+
+            <a class="nav-link d-flex align-items-center pointer" (click)="logout()">
+              <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+            </a>
+
           </div>
 
-          <a
-            class="nav-link d-flex align-items-center pointer"
-            routerLink="/wishlist"
-            routerLinkActive="active_link"
-          >
+          <a class="nav-link d-flex align-items-center pointer" routerLink="/wishlist" routerLinkActive="active_link">
             <div class="d-flex align-items-center position-relative">
               <i class="fa-solid fa-heart me-2"></i>
-              <span
-                class="badge bg-warning text-dark rounded-pill ms-1"
-                style="
+              <span class="badge bg-warning text-dark rounded-pill ms-1" style="
                   font-size: 0.6rem;
                   padding: 2px 5px;
                   position: relative;
                   top: -8px;
                   left: -8px;
-                "
-              >
+                ">
                 {{ wishlistCount$ | async }}
               </span>
             </div>
