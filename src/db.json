@@ -1,0 +1,18 @@
+{
+  "Register": [
+    {
+      "id": "04d2",
+      "username": "youssef",
+      "email": "yougalal103@aa",
+      "password": "111",
+      "confirmPassword": "111"
+    }
+  ],
+  "login": [
+    {
+      "id": "aa0b",
+      "email": "yougalal103@aa",
+      "password": "111"
+    }
+  ]
+}
