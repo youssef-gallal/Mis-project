@@ -59,6 +59,19 @@
             [(ngModel)]="movieComment" />
           <button class="btn btn-primary my-3" type="clear" style="float: right;"
             (click)="submitComment()">Submit</button>
+
+          <div *ngIf="getComments().length > 0" class="mt-3">
+            <h5 class="mb-3">Your Comments</h5>
+            <ul class="list-group">
+              <li *ngFor="let comment of getComments(); let i = index"
+                class="list-group-item d-flex justify-content-between align-items-center">
+                {{ comment }}
+                <i class="fa-solid fa-trash-can text-danger pointer" (click)="deleteComment(i)" style="cursor: pointer"
+                  title="Delete Comment"></i>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
