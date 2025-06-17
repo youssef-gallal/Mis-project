@@ -32,11 +32,6 @@
                 </li>
               </ul>
             </div>
-
-            <a class="nav-link d-flex align-items-center pointer" (click)="logout()">
-              <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
-            </a>
-
           </div>
 
           <a class="nav-link d-flex align-items-center pointer" routerLink="/wishlist" routerLinkActive="active_link">
@@ -54,6 +49,32 @@
             </div>
             Watchlist
           </a>
+          <!-- <aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+          <div class="btn-group" role="group" aria-label="">
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle text-dark" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                More
+              </button>
+              <ul class="dropdown-menu text-white" aria-labelledby="btnGroupDrop1">
+
+                <li>
+                  <a class="nav-link pointer" routerLink="/pricing" routerLinkActive="active_link">Pricing</a>
+                </li>
+                <li>
+                  <a class="nav-link pointer" routerLink="/about" routerLinkActive="active_link">About Us</a>
+                </li>
+                <li>
+                  <a class="nav-link d-flex align-items-center pointer" (click)="logout()">
+                    <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- <a class="nav-link d-flex align-items-center pointer" (click)="logout()">
+            <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+          </a> -->
         </div>
         <div id="bars" class="text-white fs-4">
           <i (click)="handleClose()" class="fa-solid fa-bars"></i>

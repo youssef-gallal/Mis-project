@@ -1,0 +1,76 @@
+:root {
+    --primary: #e50914;
+    --bg: #121212;
+    --card-bg: #1f1f1f;
+    --text: #f0f0f0;
+    --accent: #ffcc00;
+}
+
+.about-container {
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-section {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hero-section h1 {
+    font-size: 2.75rem;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+.section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.card p,
+.card ul {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card ul li::before {
+    content: '🎥 ';
+}
+
+.contact-card p {
+    margin: 0.5rem 0;
+}

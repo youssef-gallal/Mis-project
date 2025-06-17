@@ -1,0 +1,24 @@
+<div class="container py-5">
+    <div class="pricing-header text-center text-white py-5 mb-5">
+        <h2 class="display-4 fw-bold">Choose a Plan That Fits You</h2>
+        <p class="fs-5 text-light">Our Pricing Plans for Every Movie Lover</p>
+        <hr class="header-underline mx-auto mt-4" />
+    </div>
+    <div class="row">
+        <div class="col-md-4" *ngFor="let plan of plans">
+            <div class="card shadow-sm">
+                <div class="card-header text-center bg-primary text-white">
+                    <h4>{{ plan.name }}</h4>
+                </div>
+                <div class="card-body text-center">
+                    <h2 class="card-title">{{ plan.price }}</h2>
+                    <ul class="list-unstyled my-3">
+                        <li *ngFor="let feature of plan.features">✔ {{ feature }}</li>
+                    </ul>
+                    <button class="btn btn-outline-primary" (click)="sumbit(plan.id)">Choose Plan</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

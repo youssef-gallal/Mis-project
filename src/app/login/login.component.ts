@@ -50,14 +50,14 @@ export class LoginComponent implements OnInit {
         alert("Email or password is incorrect");
       } else {
         localStorage.setItem('userName', user.username || user.email);
-        this.router.navigate(['/movies']);
+        this.router.navigate(['/pricing']);
         const model = {
           email: this.loginForm.value.email,
           password: this.loginForm.value.password,
         }
         this.auth.createlogin(model).subscribe
           ((res: any) => {
-            this.router.navigate(['/movies'])
+            this.router.navigate(['/pricing'])
 
           })
 

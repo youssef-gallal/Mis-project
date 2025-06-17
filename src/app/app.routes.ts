@@ -7,6 +7,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MainPageComponent } from './home-page/main-page/main-page.component';
+import { PricingComponent } from './pricing/pricing.component';
+import { AboutComponent } from './about/about.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'movies', pathMatch: 'full' },
@@ -29,6 +31,16 @@ export const routes: Routes = [
     path: 'search/:searchKey',
     component: MovieSearchComponent,
     title: 'Search'
+  },
+  {
+    path: 'pricing',
+    component: PricingComponent,
+    title: 'Pricing'
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+    title: 'about'
   },
   {
     path: 'registration',

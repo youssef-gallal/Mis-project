@@ -12,9 +12,6 @@ import { AuthRequestService } from '../service/auth-request.service';
 export class RegistrationComponent {
   registerForm: FormGroup;
 
-
-
-
   constructor(private fb: FormBuilder, private router: Router, private auth: AuthRequestService) {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],

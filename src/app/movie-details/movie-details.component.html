@@ -64,9 +64,9 @@
             <h5 class="mb-3">Your Comments</h5>
             <ul class="list-group">
               <li *ngFor="let comment of getComments(); let i = index"
-                class="list-group-item d-flex justify-content-between align-items-center">
+                class="list-group-item d-flex justify-content-between align-items-center mb-1">
                 {{ comment }}
-                <i class="fa-solid fa-trash-can text-danger pointer" (click)="deleteComment(i)" style="cursor: pointer"
+                <i class=" fa-solid fa-trash-can text-danger pointer" (click)="deleteComment(i)" style="cursor: pointer"
                   title="Delete Comment"></i>
               </li>
             </ul>
