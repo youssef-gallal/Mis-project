@@ -11,9 +11,7 @@ export class AuthRequestService {
   createuser(model: any) {
     return this.http.post('http://localhost:3000/Register', model)
   }
-  // getuser() {
-  //   return this.http.get('http://localhost:3000/Register')
-  // }
+
   getregister(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:3000/Register');
   }
@@ -24,4 +22,13 @@ export class AuthRequestService {
   createlogin(model: any) {
     return this.http.post('http://localhost:3000/login', model)
   }
+
+  deletelogin(id: string | number): Observable<any> {
+    return this.http.delete(`http://localhost:3000/login/${id}`);
+  }
+  deleteloin(): Observable<any> {
+    return this.http.delete(`http://localhost:3000/login`);
+  }
+
+
 }

@@ -4,7 +4,8 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { AddToWishlistService } from '../service/add-to-wishlist.service';
 import { CommonModule, Location } from '@angular/common';
-import { UsernameService } from '../service/username.service';
+import { AuthRequestService } from '../service/auth-request.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -16,17 +17,22 @@ export class NavbarComponent implements OnInit {
   selectedLanguage: string = 'En';
   wishlistCount$: Observable<number>;
   username: string | null = ''
-  constructor(private AccLangService: AccLangService, private wishlistService: AddToWishlistService, private router: Router, private location: Location, private Username: UsernameService) {
+  loginuser: any[] = [];
+  constructor(private AccLangService: AccLangService, private wishlistService: AddToWishlistService, private router: Router, private location: Location, private auth: AuthRequestService) {
     this.selectedLanguage = this.AccLangService.getLanguage().toUpperCase();
     this.wishlistCount$ = this.wishlistService.getWishlist().pipe(
       map(movies => movies.length)
     );
   }
   ngOnInit(): void {
-    this.username = this.Username.getUsername()
-
+    this.getlogin()
   }
 
+  getlogin() {
+    this.auth.getlogin().subscribe(res => {
+      this.loginuser = res
+    })
+  }
 
 
   changeLanguage(lang: string) {
@@ -48,9 +54,22 @@ export class NavbarComponent implements OnInit {
     nav.style.right = nav.style.right === '50%' ? '0%' : '-50%';
   }
 
-  logout() {
-    this.router.navigate(['/login']);
-    localStorage.clear()
+
+
+  logout(): void {
+    if (this.loginuser.length == 1) {
+    }
+    // this.router.navigate(['/login']);
   }
+  // logout(): void {
+  //   const deleteRequests = this.loginuser.map(user =>
+  //     this.auth.deletelogin(user.id)
+  //   );
+
+  //   forkJoin(deleteRequests).subscribe(() => {
+  //     this.loginuser = [];
+  //     // this.router.navigate(['/login']);
+  //   })
+  // }
 
 }

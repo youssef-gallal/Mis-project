@@ -106,8 +106,7 @@ export class MoviesListComponent {
     this.auth.getlogin().subscribe(res => {
       this.Loginuser = res
       console.log(this.Loginuser);
-    }
-    )
+    })
   }
 
 
