@@ -31,7 +31,7 @@ export class RegistrationComponent {
       confirmPassword: formValue.confirmPassword
     };
 
-    this.auth.getuser().subscribe((users: any[]) => {
+    this.auth.getregister().subscribe((users: any[]) => {
       const emailExists = users.some(user => user.email === model.email);
 
       if (emailExists) {

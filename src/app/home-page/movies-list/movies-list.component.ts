@@ -4,7 +4,7 @@ import { CrudRequestService } from '../../service/crud-request.service';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Movie } from '../../types/types';
-import { UsernameService } from '../../service/username.service';
+import { AuthRequestService } from '../../service/auth-request.service';
 
 @Component({
   selector: 'app-movies-list',
@@ -24,12 +24,12 @@ export class MoviesListComponent {
   visiblePages: number[] = [];
   vote: number = 0
   username: string | null = '';
-
-  constructor(private router: Router, private _crudService: CrudRequestService, private wishlistService: AddToWishlistService, private UserName: UsernameService) { }
+  Loginuser: string[] = []
+  constructor(private router: Router, private _crudService: CrudRequestService, private wishlistService: AddToWishlistService, private auth: AuthRequestService) { }
 
   ngOnInit() {
-    this.username = this.UserName.getUsername()
     this.loadMovies(this.currentPage);
+    this.getlogin()
   }
 
   loadMovies(page: number) {
@@ -97,16 +97,34 @@ export class MoviesListComponent {
   getBackgroundColor(vote: number): string {
     return this.vote > 7 ? 'green' : 'yellow';
   }
+
+
+
+
+
+  getlogin() {
+    this.auth.getlogin().subscribe(res => {
+      this.Loginuser = res
+      console.log(this.Loginuser);
+    }
+    )
+  }
+
+
+
+
   handleMovieClick(movieId: number, event: Event) {
     event.preventDefault(); // prevent default anchor behavior
 
-    const username = this.UserName.getUsername(); // or localStorage.getItem('username');
+    // const username = this.UserName.getUsername();or localStorage.getItem('username');
 
-    if (username) {
-      this.router.navigate(['/movie', movieId]);
+    if (this.Loginuser.length == 0) {
+      // this.router.navigate(['/movie', movieId]);
+      this.router.navigate(['/login']);
     } else {
       // alert('Please log in or create a username to view movie details.');
-      this.router.navigate(['/login']);
+      // this.router.navigate(['/login']);
+      this.router.navigate(['/movie', movieId]);
     }
   }
 

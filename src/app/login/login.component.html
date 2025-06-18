@@ -5,6 +5,9 @@
     </div>
     <div class="form-side">
         <h2>Sign In</h2>
+        <div *ngIf="alertVisible" class="p-3 mt-2 alert alert-{{ alertType }}" role="alert">
+            {{ alertMessage }}
+        </div>
         <form [formGroup]="loginForm" (ngSubmit)="handleSubmitForm()">
             <input type="email" placeholder="Email" formControlName="email" required>
             @if(formControls['email'].invalid && formControls['email'].touched){

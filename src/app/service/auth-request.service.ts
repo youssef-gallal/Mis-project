@@ -14,8 +14,11 @@ export class AuthRequestService {
   // getuser() {
   //   return this.http.get('http://localhost:3000/Register')
   // }
-  getuser(): Observable<any[]> {
+  getregister(): Observable<any[]> {
     return this.http.get<any[]>('http://localhost:3000/Register');
+  }
+  getlogin(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:3000/login');
   }
 
   createlogin(model: any) {

@@ -3,14 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthRequestService } from '../service/auth-request.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+  alertVisible: boolean = false;
+  alertMessage: string = '';
+  alertType: string = '';
 
   loginForm: FormGroup;
   users: any[] = []
@@ -27,7 +31,7 @@ export class LoginComponent implements OnInit {
 
 
   getusers() {
-    this.auth.getuser().subscribe((res: any) => {
+    this.auth.getregister().subscribe((res: any) => {
       this.users = res
     })
   }
@@ -39,29 +43,34 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
   }
 
+
   Submit() {
-    this.auth.getuser().subscribe((users: any[]) => {
+    this.auth.getregister().subscribe((users: any[]) => {
       const user = users.find(item =>
         item.email === this.loginForm.value.email &&
         item.password === this.loginForm.value.password
       );
 
       if (!user) {
-        alert("Email or password is incorrect");
+        this.alertVisible = true;
+        this.alertMessage = 'Email or password is incorrect';
+        this.alertType = 'danger';
       } else {
-        localStorage.setItem('userName', user.username || user.email);
-        this.router.navigate(['/pricing']);
+        // localStorage.setItem('userName', user.username || user.email);
+        this.alertVisible = true;
+        this.alertMessage = 'Login successful!';
+        this.alertType = 'success';
+
         const model = {
           email: this.loginForm.value.email,
           password: this.loginForm.value.password,
         }
-        this.auth.createlogin(model).subscribe
-          ((res: any) => {
-            this.router.navigate(['/pricing'])
 
-          })
-
+        this.auth.createlogin(model).subscribe((res: any) => {
+          this.router.navigate(['/pricing']);
+        });
       }
     });
   }
+
 }
