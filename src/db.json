@@ -1,18 +1,4 @@
 {
-  "Register": [
-    {
-      "id": "04d2",
-      "username": "youssef",
-      "email": "y@a",
-      "password": "111",
-      "confirmPassword": "111"
-    }
-  ],
-  "login": [
-    {
-      "id": "c364",
-      "email": "y@a",
-      "password": "111"
-    }
-  ]
+  "Register": [],
+  "login": []
 }

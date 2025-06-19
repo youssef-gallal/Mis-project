@@ -5,7 +5,7 @@ import { map, Observable } from 'rxjs';
 import { AddToWishlistService } from '../service/add-to-wishlist.service';
 import { CommonModule, Location } from '@angular/common';
 import { AuthRequestService } from '../service/auth-request.service';
-import { forkJoin } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +18,9 @@ export class NavbarComponent implements OnInit {
   wishlistCount$: Observable<number>;
   username: string | null = ''
   loginuser: any[] = [];
-  constructor(private AccLangService: AccLangService, private wishlistService: AddToWishlistService, private router: Router, private location: Location, private auth: AuthRequestService) {
+  // loginid: number = '';
+
+  constructor(private http: HttpClient, private AccLangService: AccLangService, private wishlistService: AddToWishlistService, private router: Router, private location: Location, private auth: AuthRequestService) {
     this.selectedLanguage = this.AccLangService.getLanguage().toUpperCase();
     this.wishlistCount$ = this.wishlistService.getWishlist().pipe(
       map(movies => movies.length)
@@ -31,6 +33,7 @@ export class NavbarComponent implements OnInit {
   getlogin() {
     this.auth.getlogin().subscribe(res => {
       this.loginuser = res
+      console.log(res);
     })
   }
 
@@ -56,20 +59,22 @@ export class NavbarComponent implements OnInit {
 
 
 
-  logout(): void {
-    if (this.loginuser.length == 1) {
-    }
-    // this.router.navigate(['/login']);
-  }
-  // logout(): void {
-  //   const deleteRequests = this.loginuser.map(user =>
-  //     this.auth.deletelogin(user.id)
-  //   );
-
-  //   forkJoin(deleteRequests).subscribe(() => {
-  //     this.loginuser = [];
-  //     // this.router.navigate(['/login']);
-  //   })
+  //   logout(): void {
+  //     const deleteRequests = this.loginuser.map(user =>
+  //       this.auth.deletelogin(this.loginid));
+  //     this.getlogin()
+  //     this.router.navigate(['/login']);
+  //   };
   // }
+  // logout(): void {
+  //   this.http.delete(`http://localhost:3000/login/${this.loginid}`).subscribe(() => {
+  //     console.log('Login entry deleted');
+  //     this.router.navigate(['/login']);
+  //     this.getlogin()
+  //   });
+  // }
+  logout(): void {
 
+    this.router.navigate(['/login']);
+  }
 }

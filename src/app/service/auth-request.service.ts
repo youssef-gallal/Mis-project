@@ -23,12 +23,7 @@ export class AuthRequestService {
     return this.http.post('http://localhost:3000/login', model)
   }
 
-  deletelogin(id: string | number): Observable<any> {
-    return this.http.delete(`http://localhost:3000/login/${id}`);
-  }
-  deleteloin(): Observable<any> {
-    return this.http.delete(`http://localhost:3000/login`);
-  }
+
 
 
 }

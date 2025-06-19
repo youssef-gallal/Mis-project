@@ -56,7 +56,6 @@ export class LoginComponent implements OnInit {
         this.alertMessage = 'Email or password is incorrect';
         this.alertType = 'danger';
       } else {
-        // localStorage.setItem('userName', user.username || user.email);
         this.alertVisible = true;
         this.alertMessage = 'Login successful!';
         this.alertType = 'success';
